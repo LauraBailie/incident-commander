@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Incident Commander AI</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🚨 Incident Commander AI</h1>
+
+<section>
+
+<h2>Create Incident</h2>
+
+<input
+id="title"
+placeholder="Incident title"
+>
+
+<textarea
+id="description"
+placeholder="Describe the incident..."
+></textarea>
+
+<select id="severity">
+
+<option>Critical</option>
+<option>High</option>
+<option>Medium</option>
+<option>Low</option>
+
+</select>
+
+<input
+id="service"
+placeholder="Affected service"
+>
+
+<button onclick="createIncident()">
+
+Create Incident
+
+</button>
+
+</section>
+
+<section>
+
+<h2>Recent Incidents</h2>
+
+<div id="incidents">
+
+Loading...
+
+</div>
+
+</section>
+
+<section>
+
+<h2>Semantic Search</h2>
+
+<input
+id="searchText"
+placeholder="Search similar incidents..."
+>
+
+<button onclick="searchIncidents()">
+
+Search
+
+</button>
+
+<div id="searchResults"></div>
+
+</section>
+
+<section>
+
+<h2>AI Investigation</h2>
+
+<textarea
+id="question"
+placeholder="Payment API returning HTTP 500 after deployment..."
+></textarea>
+
+<button onclick="investigate()">
+
+Investigate
+
+</button>
+
+<pre id="analysis"></pre>
+
+</section>
+
+</div>
+
+<script src="app.js"></script>
+
+</body>
+
+</html>

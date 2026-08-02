@@ -1,0 +1,159 @@
+const API = "http://127.0.0.1:8000";
+
+window.onload = loadIncidents;
+
+async function loadIncidents(){
+
+const response =
+await fetch(API+"/incidents")
+
+const incidents =
+await response.json()
+
+let html=""
+
+incidents.forEach(i=>{
+
+html += `
+
+<div class="card">
+
+<h3>🚨 ${i.title}</h3>
+
+<span class="badge ${i.severity.toLowerCase()}">
+
+${i.severity}
+
+</span>
+
+<p><b>Status:</b> ${i.status}</p>
+
+<p><b>Service:</b> ${i.service}</p>
+
+<p><b>Created:</b>
+
+${new Date(i.created_at).toLocaleString()}
+
+</p>
+
+</div>
+
+`;
+
+})
+
+document.getElementById("incidents").innerHTML=html
+
+}
+
+async function createIncident(){
+
+    await fetch(API + "/incidents",{
+
+        method:"POST",
+
+        headers:{
+            "Content-Type":"application/json"
+        },
+
+        body:JSON.stringify({
+
+            title:document.getElementById("title").value,
+            description:document.getElementById("description").value,
+            severity:document.getElementById("severity").value,
+            status:"Open",
+            service:document.getElementById("service").value
+
+        })
+
+    });
+
+    document.getElementById("title").value="";
+    document.getElementById("description").value="";
+    document.getElementById("service").value="";
+
+    loadIncidents();
+
+}
+
+async function investigate() {
+
+    const response = await fetch(API + "/commander/investigate", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            question: document.getElementById("question").value
+        })
+    });
+
+    const result = await response.json();
+
+    document.getElementById("analysis").textContent =
+    JSON.stringify(result,null,2)
+`
+ROOT CAUSE
+-----------
+${result.root_cause}
+
+IMMEDIATE ACTIONS
+-----------------
+${result.immediate_actions.join("\n• ")}
+
+LONG TERM ACTIONS
+-----------------
+${result.long_term_actions.join("\n• ")}
+
+CONFIDENCE
+----------
+${result.confidence}%
+`;
+}
+
+loadIncidents()
+
+async function searchIncidents(){
+
+    const response = await fetch(API + "/search", {
+
+        method: "POST",
+
+        headers:{
+            "Content-Type":"application/json"
+        },
+
+        body: JSON.stringify({
+
+            question:
+            document.getElementById("searchText").value
+
+        })
+
+    });
+
+    const results = await response.json();
+
+    let html = "";
+
+    results.forEach(i=>{
+
+        html += `
+        <div>
+
+        <h3>${i.title}</h3>
+
+        <p><b>Severity:</b> ${i.severity}</p>
+
+        <p>${i.summary}</p>
+
+        <hr>
+
+        </div>
+        `;
+
+    });
+
+    document.getElementById("searchResults").innerHTML = html;
+
+}
