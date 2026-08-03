@@ -26,5 +26,6 @@ if "sslrootcert=" not in DATABASE_URL:
 def get_connection():
     return psycopg.connect(
         DATABASE_URL,
-        row_factory=dict_row
+        row_factory=dict_row,
+        sslrootcert="backend/certs/root.crt",
     )
