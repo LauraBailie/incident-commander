@@ -18,14 +18,8 @@ DATABASE_URL = DATABASE_URL.replace(
     1
 )
 
-# Render/Linux doesn't have ~/.postgresql/root.crt
-if "sslrootcert=" not in DATABASE_URL:
-    separator = "&" if "?" in DATABASE_URL else "?"
-    DATABASE_URL += f"{separator}sslrootcert=system"
-
 def get_connection():
     return psycopg.connect(
         DATABASE_URL,
-        row_factory=dict_row,
-        sslrootcert="backend/certs/root.crt",
+        row_factory=dict_row
     )
