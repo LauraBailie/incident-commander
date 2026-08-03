@@ -1,6 +1,6 @@
 # 🚨 Incident Commander AI
 
-An AI-powered incident management platform that helps Site Reliability Engineers investigate production incidents using semantic search and Amazon Bedrock.
+An AI-powered incident management platform that helps Site Reliability Engineers investigate and solve production incidents faster, using semantic search and Amazon Bedrock tools.
 
 ---
 
@@ -21,15 +21,38 @@ An AI-powered incident management platform that helps Site Reliability Engineers
 ## Architecture
 
 ```
-Frontend (HTML/CSS/JavaScript)
-            │
-            ▼
-      FastAPI Backend
-            │
-    ┌───────┴────────┐
-    ▼                ▼
-CockroachDB     Amazon Bedrock
-(Vector DB)     Claude + Titan
+                     AI Incident Commander
+
+         +-----------------------------------------+
+         |           Web Frontend                  |
+         |      HTML • CSS • JavaScript           |
+         +------------------+----------------------+
+                            |
+                       REST API
+                            |
+                            ▼
+                +-------------------------+
+                |     FastAPI Backend     |
+                |     Python Services     |
+                +-----------+-------------+
+                            |
+          +-----------------+------------------+
+          |                                    |
+          ▼                                    ▼
+ +-------------------+              +----------------------+
+ |  Amazon Bedrock   |              | CockroachDB Cloud    |
+ |-------------------|              |----------------------|
+ | Claude 3          |              | incidents            |
+ | Titan Embeddings  |              | notes                |
+ | AI Reasoning      |              | resolutions          |
+ | Summarization     |              | audit_log            |
+ +-------------------+              | embeddings (vector)  |
+          |                         | semantic search      |
+          +------------+------------+----------------------+
+                       |
+                       ▼
+            AI Incident Commander
+      (Retrieval-Augmented Investigation)
 ```
 
 ---
