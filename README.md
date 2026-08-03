@@ -1,102 +1,156 @@
 # 🚨 Incident Commander AI
 
-An AI-powered incident management platform that helps Site Reliability Engineers investigate and solve production incidents faster, using semantic search and Amazon Bedrock tools.
+AI-powered incident response platform that combines semantic search, vector memory, and Amazon Bedrock to investigate production incidents using historical knowledge stored in CockroachDB.
+
+> Built for the CockroachDB x AWS Agentic AI Hackathon.
 
 ---
 
 ## Architecture
 
 <p align="center">
-  <img src="docs/architecture.png" alt="Architecture Diagram" width="900">
+  <img src="docs/architecture.png" alt="Incident Commander AI Architecture" width="900">
+  <br>
+  <em>System Architecture</em>
 </p>
 
 ---
 
 ## Features
 
-- Create and manage production incidents
-- AI-generated incident summaries
-- Semantic search over historical incidents
-- AI-powered incident investigation
-- Root cause analysis
-- Immediate remediation recommendations
-- Long-term improvement suggestions
-- REST API built with FastAPI
-- Lightweight web dashboard
+- 🚨 Create and manage production incidents
+- 🧠 AI-powered incident investigation
+- 🔍 Semantic search across historical incidents
+- 📚 Persistent vector memory using CockroachDB
+- 🤖 Root cause analysis with Amazon Bedrock (Claude)
+- 📈 Recommended immediate and long-term remediation
+- 🌐 FastAPI REST API
+- 💻 Responsive web dashboard
 
 ---
 
-## Tech Stack
+## Demo
 
-### Backend
-- Python
-- FastAPI
-- Pydantic
-- Psycopg3
+**Live Application**
 
-### Database
-- CockroachDB Cloud
-- PostgreSQL
-- pgvector (Distributed Vector Indexing)
+https://incident-commander-339p.onrender.com
 
-### AI
-- Amazon Bedrock
-- Claude
-- Titan Embeddings
+**GitHub Repository**
+
+https://github.com/YOUR_USERNAME/incident-commander
+
+---
+
+# Tech Stack
 
 ### Frontend
+
 - HTML5
 - CSS3
-- Vanilla JavaScript
+- JavaScript
 
-### Cloud & DevOps
-- AWS
-- CockroachDB ccloud CLI
-- GitHub
+### Backend
 
----
+- Python
+- FastAPI
+- Uvicorn
+- Psycopg
 
-## AI Workflow
+### Database
 
-1. User creates an incident.
-2. Claude generates a concise incident summary.
-3. Titan Embeddings converts the summary into a vector.
-4. The vector is stored in CockroachDB.
-5. During investigation, semantic search retrieves similar incidents.
-6. Claude generates:
-   - likely root cause
-   - immediate actions
-   - long-term recommendations
-   - confidence score
+- CockroachDB Cloud
+- Distributed Vector Indexing
+- pgvector
 
----
-
-## CockroachDB Features Used
-
-### Distributed Vector Indexing
-
-Historical incidents are stored as vector embeddings to enable semantic retrieval of similar incidents.
-
-### ccloud CLI
-
-Used to manage and inspect the CockroachDB Cloud deployment during development and testing.
-
----
-
-## AWS Services Used
+### AI
 
 - Amazon Bedrock
-  - Claude
-  - Titan Embeddings
+- Anthropic Claude
+
+### Infrastructure
+
+- AWS
+- Render
+- GitHub
+
+### Developer Tools
+
+- CockroachDB ccloud CLI
+- CockroachDB Cloud Console
 
 ---
 
-## Running Locally
+# Architecture
+
+The application follows a Retrieval-Augmented Generation (RAG) workflow.
+
+1. A user creates an incident through the web interface.
+2. FastAPI stores the incident in CockroachDB.
+3. Amazon Bedrock generates an embedding for the incident summary.
+4. The embedding is stored inside CockroachDB using Distributed Vector Indexing.
+5. When an investigation is requested:
+   - the current incident is embedded,
+   - CockroachDB performs semantic vector search,
+   - the most relevant historical incidents are retrieved,
+   - Claude receives those incidents as context,
+   - Claude generates root-cause analysis and remediation guidance.
+6. Results are displayed in the dashboard.
+
+---
+
+# CockroachDB Features Used
+
+This project uses **two required CockroachDB technologies**.
+
+## Distributed Vector Indexing
+
+- Stores incident embeddings
+- Performs semantic similarity search
+- Provides long-term memory for the AI agent
+
+## ccloud CLI
+
+Used for:
+
+- cluster management
+- SQL execution
+- verifying stored incidents
+- demonstrating persistent AI memory
+
+---
+
+# AWS Services Used
+
+## Amazon Bedrock
+
+Claude is used to:
+
+- generate embeddings
+- perform Retrieval-Augmented Generation
+- investigate incidents
+- recommend remediation actions
+
+---
+
+# API Endpoints
+
+| Method | Endpoint | Description |
+|---------|----------|-------------|
+| GET | /incidents | List incidents |
+| POST | /incidents | Create incident |
+| POST | /search | Semantic search |
+| POST | /commander/investigate | AI investigation |
+| GET | /ai/{id} | AI summary |
+
+---
+
+# Running Locally
 
 Clone the repository.
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/YOUR_USERNAME/incident-commander.git
+
 cd incident-commander
 ```
 
@@ -106,15 +160,13 @@ Install dependencies.
 pip install -r requirements.txt
 ```
 
-Create a `.env` file containing:
+Configure environment variables.
 
-```
-DATABASE_URL=
-AWS_REGION=
-AWS_ACCESS_KEY_ID=
-AWS_SECRET_ACCESS_KEY=
-BEDROCK_CHAT_MODEL=
-BEDROCK_EMBEDDING_MODEL=
+```text
+DATABASE_URL=...
+AWS_ACCESS_KEY_ID=...
+AWS_SECRET_ACCESS_KEY=...
+AWS_REGION=...
 ```
 
 Run the application.
@@ -123,7 +175,7 @@ Run the application.
 uvicorn backend.main:app --reload
 ```
 
-Open:
+Open
 
 ```
 http://127.0.0.1:8000
@@ -131,17 +183,41 @@ http://127.0.0.1:8000
 
 ---
 
-## Future Improvements
+# Project Structure
 
-- Slack integration
-- CloudWatch alerts
-- Multi-agent workflows
-- Automatic incident timelines
-- Authentication
-- Grafana integration
+```
+incident-commander/
+
+backend/
+    api/
+    services/
+    static/
+    main.py
+    crud.py
+    database.py
+
+docs/
+    architecture.png
+
+README.md
+requirements.txt
+LICENSE
+```
 
 ---
 
-## License
+# Future Improvements
 
-MIT
+- Multi-agent incident orchestration
+- Automatic incident creation from CloudWatch alerts
+- Slack and Microsoft Teams integration
+- Streaming AI responses
+- Authentication and role-based access control
+- Incident timeline visualization
+- Knowledge base expansion with S3 documents
+
+---
+
+# License
+
+MIT License
