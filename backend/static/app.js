@@ -4,45 +4,41 @@ window.onload = loadIncidents;
 
 async function loadIncidents(){
 
-const response =
-await fetch(API+"/incidents")
+try {
 
-const incidents =
-await response.json()
+    const response = await fetch(API + "/incidents");
 
-let html=""
+    if (!response.ok) {
+        throw new Error("Backend returned " + response.status);
+    }
 
-incidents.forEach(i=>{
+    const incidents = await response.json();
 
-html += `
+    let html = "";
 
-<div class="card">
+    incidents.forEach(i => {
 
-<h3>🚨 ${i.title}</h3>
+        html += `
+        <div class="card">
+            <h3>${i.title}</h3>
+            <p>Status: ${i.status}</p>
+            <p>Severity: ${i.severity}</p>
+        </div>
+        `;
 
-<span class="badge ${i.severity.toLowerCase()}">
+    });
 
-${i.severity}
+    document.getElementById("incidents").innerHTML = html;
 
-</span>
+}
+catch(err){
 
-<p><b>Status:</b> ${i.status}</p>
+    console.error(err);
 
-<p><b>Service:</b> ${i.service}</p>
+    document.getElementById("incidents").innerHTML =
+        "<p>Unable to load incidents.</p>";
 
-<p><b>Created:</b>
-
-${new Date(i.created_at).toLocaleString()}
-
-</p>
-
-</div>
-
-`;
-
-})
-
-document.getElementById("incidents").innerHTML=html
+}
 
 }
 

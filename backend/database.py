@@ -21,6 +21,6 @@ DATABASE_URL = DATABASE_URL.replace(
 
 def get_connection():
     return psycopg.connect(
-        DATABASE_URL,
+        DATABASE_URL + "&sslrootcert=system",
         row_factory=dict_row
     )
