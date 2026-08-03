@@ -4,6 +4,14 @@ An AI-powered incident management platform that helps Site Reliability Engineers
 
 ---
 
+## Architecture
+
+<p align="center">
+  <img src="docs/architecture.png" alt="Architecture Diagram" width="900">
+</p>
+
+---
+
 ## Features
 
 - Create and manage production incidents
@@ -15,45 +23,6 @@ An AI-powered incident management platform that helps Site Reliability Engineers
 - Long-term improvement suggestions
 - REST API built with FastAPI
 - Lightweight web dashboard
-
----
-
-## Architecture
-
-```
-                     AI Incident Commander
-
-         +-----------------------------------------+
-         |           Web Frontend                  |
-         |      HTML • CSS • JavaScript           |
-         +------------------+----------------------+
-                            |
-                       REST API
-                            |
-                            ▼
-                +-------------------------+
-                |     FastAPI Backend     |
-                |     Python Services     |
-                +-----------+-------------+
-                            |
-          +-----------------+------------------+
-          |                                    |
-          ▼                                    ▼
- +-------------------+              +----------------------+
- |  Amazon Bedrock   |              | CockroachDB Cloud    |
- |-------------------|              |----------------------|
- | Claude 3          |              | incidents            |
- | Titan Embeddings  |              | notes                |
- | AI Reasoning      |              | resolutions          |
- | Summarization     |              | audit_log            |
- +-------------------+              | embeddings (vector)  |
-          |                         | semantic search      |
-          +------------+------------+----------------------+
-                       |
-                       ▼
-            AI Incident Commander
-      (Retrieval-Augmented Investigation)
-```
 
 ---
 
