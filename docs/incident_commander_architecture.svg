@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="820" viewBox="0 0 1400 820">
+<style>
+text{font-family:Arial,Helvetica,sans-serif}
+.title{font-size:30px;font-weight:bold;fill:#1f2937}
+.subtitle{font-size:15px;fill:#4b5563}
+.box{fill:#ffffff;stroke:#2563eb;stroke-width:2;rx:14}
+.aws{fill:#fff7ed;stroke:#f59e0b;stroke-width:2;rx:14}
+.db{fill:#ecfdf5;stroke:#059669;stroke-width:2;rx:14}
+.cli{fill:#f5f3ff;stroke:#7c3aed;stroke-width:2;rx:14}
+.label{font-size:18px;font-weight:bold;fill:#111827}
+.small{font-size:14px;fill:#374151}
+.arrow{stroke:#4b5563;stroke-width:3;fill:none;marker-end:url(#a)}
+</style>
+<defs>
+<marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+<path d="M0,0 L8,3 L0,6 Z" fill="#4b5563"/>
+</marker>
+</defs>
+
+<text x="700" y="45" text-anchor="middle" class="title">AI Incident Commander Architecture</text>
+<text x="700" y="72" text-anchor="middle" class="subtitle">CockroachDB + Amazon Bedrock + FastAPI + Render</text>
+
+<rect class="box" x="60" y="170" width="220" height="110"/>
+<text x="170" y="210" text-anchor="middle" class="label">User / SRE</text>
+<text x="170" y="240" text-anchor="middle" class="small">Web Browser</text>
+
+<rect class="box" x="360" y="140" width="260" height="170"/>
+<text x="490" y="180" text-anchor="middle" class="label">Frontend</text>
+<text x="490" y="210" text-anchor="middle" class="small">HTML • CSS • JavaScript</text>
+<text x="490" y="240" text-anchor="middle" class="small">Dashboard</text>
+<text x="490" y="265" text-anchor="middle" class="small">Incident Creation</text>
+
+<rect class="box" x="700" y="120" width="280" height="220"/>
+<text x="840" y="160" text-anchor="middle" class="label">FastAPI Backend</text>
+<text x="840" y="195" text-anchor="middle" class="small">REST API</text>
+<text x="840" y="220" text-anchor="middle" class="small">Semantic Search</text>
+<text x="840" y="245" text-anchor="middle" class="small">AI Incident Commander</text>
+<text x="840" y="270" text-anchor="middle" class="small">CRUD Operations</text>
+
+<rect class="aws" x="1080" y="90" width="260" height="140"/>
+<text x="1210" y="130" text-anchor="middle" class="label">Amazon Bedrock</text>
+<text x="1210" y="165" text-anchor="middle" class="small">Claude Model</text>
+<text x="1210" y="190" text-anchor="middle" class="small">Root Cause Analysis</text>
+
+<rect class="db" x="1040" y="390" width="300" height="220"/>
+<text x="1190" y="430" text-anchor="middle" class="label">CockroachDB Cloud</text>
+<text x="1190" y="465" text-anchor="middle" class="small">Incident Memory</text>
+<text x="1190" y="495" text-anchor="middle" class="small">Distributed Vector Index</text>
+<text x="1190" y="525" text-anchor="middle" class="small">Embeddings</text>
+<text x="1190" y="555" text-anchor="middle" class="small">Semantic Search</text>
+
+<rect class="cli" x="350" y="500" width="280" height="120"/>
+<text x="490" y="540" text-anchor="middle" class="label">ccloud CLI</text>
+<text x="490" y="570" text-anchor="middle" class="small">Cluster Management</text>
+<text x="490" y="595" text-anchor="middle" class="small">Developer Operations</text>
+
+<rect class="box" x="700" y="500" width="280" height="120"/>
+<text x="840" y="540" text-anchor="middle" class="label">Render</text>
+<text x="840" y="570" text-anchor="middle" class="small">Hosted FastAPI</text>
+<text x="840" y="595" text-anchor="middle" class="small">Public Demo</text>
+
+<path class="arrow" d="M280 225 L360 225"/>
+<path class="arrow" d="M620 225 L700 225"/>
+<path class="arrow" d="M980 180 L1080 160"/>
+<path class="arrow" d="M980 300 L1080 460"/>
+<path class="arrow" d="M630 560 L1040 560"/>
+<path class="arrow" d="M840 340 L840 500"/>
+
+</svg>

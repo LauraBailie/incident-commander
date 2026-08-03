@@ -35,9 +35,6 @@ AI-powered incident response platform that combines semantic search, vector memo
 
 https://incident-commander-339p.onrender.com
 
-**GitHub Repository**
-
-https://github.com/YOUR_USERNAME/incident-commander
 
 ---
 
