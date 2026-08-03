@@ -12,15 +12,19 @@ DATABASE_URL = os.getenv("DATABASE_URL")
 if not DATABASE_URL:
     raise RuntimeError("DATABASE_URL not found.")
 
-# Psycopg expects a PostgreSQL URL
 DATABASE_URL = DATABASE_URL.replace(
     "cockroachdb://",
     "postgresql://",
     1
 )
 
+# Render/Linux doesn't have ~/.postgresql/root.crt
+if "sslrootcert=" not in DATABASE_URL:
+    separator = "&" if "?" in DATABASE_URL else "?"
+    DATABASE_URL += f"{separator}sslrootcert=system"
+
 def get_connection():
     return psycopg.connect(
-        DATABASE_URL + "&sslrootcert=system",
+        DATABASE_URL,
         row_factory=dict_row
     )
