@@ -86,20 +86,18 @@ async function investigate() {
 
     const result = await response.json();
 
-    document.getElementById("analysis").textContent =
-    JSON.stringify(result,null,2)
-`
+    document.getElementById("analysis").textContent = `
 ROOT CAUSE
------------
+----------
 ${result.root_cause}
 
 IMMEDIATE ACTIONS
 -----------------
-${result.immediate_actions.join("\n• ")}
+• ${result.immediate_actions.join("\n• ")}
 
 LONG TERM ACTIONS
 -----------------
-${result.long_term_actions.join("\n• ")}
+• ${result.long_term_actions.join("\n• ")}
 
 CONFIDENCE
 ----------
